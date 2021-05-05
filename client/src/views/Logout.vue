@@ -2,7 +2,8 @@
   <div class="container">
     <div class="d-flex flex-column justify-content-center">
       <div class="mx-auto">
-        <router-link to="/">Home</router-link> | <router-link to="/login">Login</router-link>
+        <router-link to="/">Home</router-link> |
+        <router-link to="/login">Login</router-link>
       </div>
       <h5 class="text-center my-3 text-danger">
         Your are logged out!
@@ -16,6 +17,15 @@
 export default {
   async created() {
     // enter your code here
+    let result = await axios({
+      method: 'get',
+      url: '/logout',
+    });
+    console.log(result);
+
+    // 
+    localStorage.setItem('id', '');
+    localStorage.setItem('name', '');
   },
 };
 </script>
