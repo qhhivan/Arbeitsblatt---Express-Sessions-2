@@ -24,30 +24,30 @@ const redirectLogin = (req, res, next) => {
 
 router.get('/logout', redirectLogin, (req, res) => {
   // enter your code here
-    req.session.destroy();
-    res.clearCookie(process.env.SESSION_NAME);
-    res.status(200).send('Logout');
+  req.session.destroy();
+  res.clearCookie(process.env.SESSION_NAME);
+  res.status(200).send('Logout');
 });
 
 router.post('/register', (req, res) => {
   // enter your code here
+  let name = req.body.name;
   let email = req.body.email;
   let password = req.body.password;
-  let name = req.body.name;
 
   if (name != '' && password != '' && email != '') {
     if (users.find((el) => el.email == email)) {
       res.status(409).send('Email already registered');
     } else {
-      let highestid = 0;
+      let oid = 0;
       for (let i of users) {
-        if (i.id > highestid) {
-          highestid = i.id;
+        if (i.id > oid) {
+          oid = i.id;
         }
       }
-      let newid = highestid + 1;
+      let nid = oid + 1;
 
-      users.push({ id: newid, name: name, email: email, password: password });
+      users.push({ id: nid, name: name, email: email, password: password });
       res.status(200).send('user created');
     }
   } else {

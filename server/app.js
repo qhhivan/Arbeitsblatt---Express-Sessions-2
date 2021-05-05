@@ -3,6 +3,9 @@ const morgan = require('morgan');
 const path = require('path');
 const routes = require('./routes');
 const errorHandler = require('./middleware/errorHandler');
+const session = require('express-session');
+const cors = require('cors');
+const history = require('connect-history-api-fallback');
 
 require('dotenv').config({ path: __dirname + '/.env' });
 
@@ -12,7 +15,11 @@ app.use(morgan('dev'));
 
 app.use(express.static(path.join(__dirname, '/public')));
 
+app.use(history());
+
 app.use(express.json());
+
+app.use(cors());
 
 let {
   PORT,

@@ -23,7 +23,7 @@ export default {
     });
     console.log(result);
 
-    // 
+    // LS
     localStorage.setItem('id', '');
     localStorage.setItem('name', '');
   },
